@@ -13,6 +13,10 @@
 		BDB27CA71A94D5F700BF7FEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDB27CA61A94D5F700BF7FEB /* Images.xcassets */; };
 		BDB27CAA1A94D5F700BF7FEB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDB27CA81A94D5F700BF7FEB /* LaunchScreen.xib */; };
 		BDB27CB61A94D5F700BF7FEB /* GameBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB27CB51A94D5F700BF7FEB /* GameBoardTests.swift */; };
+		BDB27CC21A94D9EF00BF7FEB /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB27CC11A94D9EF00BF7FEB /* GameBoardView.swift */; };
+		BDB27CC41A94E33500BF7FEB /* GamePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB27CC31A94E33500BF7FEB /* GamePiece.swift */; };
+		BDB27CC61A95152B00BF7FEB /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB27CC51A95152B00BF7FEB /* API.swift */; };
+		BDB27CC81A95155300BF7FEB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB27CC71A95155300BF7FEB /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		BDB27CAF1A94D5F700BF7FEB /* GameBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDB27CB41A94D5F700BF7FEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDB27CB51A94D5F700BF7FEB /* GameBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardTests.swift; sourceTree = "<group>"; };
+		BDB27CC11A94D9EF00BF7FEB /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
+		BDB27CC31A94E33500BF7FEB /* GamePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePiece.swift; sourceTree = "<group>"; };
+		BDB27CC51A95152B00BF7FEB /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BDB27CC71A95155300BF7FEB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,8 @@
 		BDB27C911A94D5F700BF7FEB = {
 			isa = PBXGroup;
 			children = (
+				BDB27CC11A94D9EF00BF7FEB /* GameBoardView.swift */,
+				BDB27CC31A94E33500BF7FEB /* GamePiece.swift */,
 				BDB27C9C1A94D5F700BF7FEB /* GameBoard */,
 				BDB27CB21A94D5F700BF7FEB /* GameBoardTests */,
 				BDB27C9B1A94D5F700BF7FEB /* Products */,
@@ -80,6 +90,8 @@
 				BDB27C9F1A94D5F700BF7FEB /* AppDelegate.swift */,
 				BDB27CA11A94D5F700BF7FEB /* ViewController.swift */,
 				BDB27CA31A94D5F700BF7FEB /* Main.storyboard */,
+				BDB27CC51A95152B00BF7FEB /* API.swift */,
+				BDB27CC71A95155300BF7FEB /* SignUpViewController.swift */,
 				BDB27CA61A94D5F700BF7FEB /* Images.xcassets */,
 				BDB27CA81A94D5F700BF7FEB /* LaunchScreen.xib */,
 				BDB27C9D1A94D5F700BF7FEB /* Supporting Files */,
@@ -212,8 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDB27CC81A95155300BF7FEB /* SignUpViewController.swift in Sources */,
 				BDB27CA21A94D5F700BF7FEB /* ViewController.swift in Sources */,
 				BDB27CA01A94D5F700BF7FEB /* AppDelegate.swift in Sources */,
+				BDB27CC41A94E33500BF7FEB /* GamePiece.swift in Sources */,
+				BDB27CC21A94D9EF00BF7FEB /* GameBoardView.swift in Sources */,
+				BDB27CC61A95152B00BF7FEB /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +421,7 @@
 				BDB27CBB1A94D5F700BF7FEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BDB27CBC1A94D5F700BF7FEB /* Build configuration list for PBXNativeTarget "GameBoardTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +430,7 @@
 				BDB27CBE1A94D5F700BF7FEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
