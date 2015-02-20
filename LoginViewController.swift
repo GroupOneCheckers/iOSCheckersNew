@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 
-class SignUpViewController: UIViewController, SignedInProtocol {
+class LoginViewController: UIViewController, SignedInProtocol {
     
     
     
@@ -19,20 +19,26 @@ class SignUpViewController: UIViewController, SignedInProtocol {
         super.viewDidLoad()
         
         
-        User.currentUser().delegate = self
-        
-        if let token = User.currentUser().token {
-            
-            
-            goToApp()
-            
-            
-        }
+        User.currentUser().delegate2 = self
+       
         
         
     }
     
-    @IBOutlet weak var usernameField: UITextField!
+    override func viewDidAppear(animated: Bool) {
+        
+        
+        if let token = User.currentUser().token {
+            
+            
+  
+            self.goToApp()
+            
+        
+        }
+
+    }
+  
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -40,7 +46,7 @@ class SignUpViewController: UIViewController, SignedInProtocol {
     
     
     
-    @IBAction func signUp(sender: AnyObject) {
+    @IBAction func logIn(sender: AnyObject) {
         
         
         var message = ""
@@ -61,7 +67,7 @@ class SignUpViewController: UIViewController, SignedInProtocol {
         }
             
         else {
-            User.currentUser().getUserToken(usernameField.text, email: emailField.text, password: passwordField.text)
+            User.currentUser().login(emailField.text, password: passwordField.text)
         }
         
         
@@ -72,6 +78,10 @@ class SignUpViewController: UIViewController, SignedInProtocol {
         let vc = storyboard.instantiateViewControllerWithIdentifier("gameBV") as ViewController
         
         
+    
+        storyboard.instantiateViewControllerWithIdentifier("gameBV")
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
         
         UIApplication.sharedApplication().keyWindow?.rootViewController = vc
     }

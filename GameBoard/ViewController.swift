@@ -10,9 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var boardView: GameBoardView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //var board = Board()
+        
+        
+        
+        //board.boardView = boardView
+        
+        DataModel.mainData().currentGame = GameModel()
     }
 
     override func didReceiveMemoryWarning() {

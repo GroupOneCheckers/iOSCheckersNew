@@ -34,10 +34,14 @@ protocol SignedInProtocol {
     
 }
 
+
 class APIRequest {
     
     
     var delegate: SignUpViewController?
+    
+    var delegate2: LoginViewController?
+
     // (responseInfo: [String:AnyObject]) -> ()
     
     // that class func gets called in the user class
@@ -115,6 +119,8 @@ class User {
     
     var delegate: SignUpViewController?
     
+    var delegate2: LoginViewController?
+    
     var token: String? {
         
         didSet {
@@ -179,7 +185,7 @@ class User {
                 
                 println(responseInfo!)
                 if let dataInfo: AnyObject = responseInfo!["user"] {
-                    if let token = dataInfo["authentification_token"] as? String {
+                    if let token = dataInfo["authentication_token"] as? String {
                         self.token = token
                     }
                     
@@ -206,17 +212,17 @@ class User {
         })
     }
     
-    func login(username: String, password: String, token: String) {
+    func login(email: String, password: String) {
         
         
         // the key names are for us (we chose the name of the keynames, the values are going to be used for url request)
         let options: [String:AnyObject] = [
             
-            "endpoint": "users/sign_in",
+            "endpoint": "/users/sign_in",
             "method": "POST",
             "body": [
                 
-                "user": [ "email": username, "password": password, "token_auth": token ]
+                "user": [ "email": email, "password": password ]
                 
                 
             ]
@@ -225,8 +231,9 @@ class User {
         
         // responseInfo will be set at the end of the requestwithoptions function: (completion: requestWithoptions), then we will print responseInfo
         APIRequest.requestWithOptions(options, andCompletion: { (responseInfo, error) -> () in
-            
-            if error != "" || error != nil {
+            if error != nil {
+                
+                println("Error != nil")
                 self.delegate?.signInUnsuccesful(error!)
             }
             else {
@@ -234,14 +241,17 @@ class User {
                 
                 println(responseInfo!)
                 if let dataInfo: AnyObject = responseInfo!["user"] {
-                    if let token = dataInfo["authentification_token"] as? String {
+                    if let token = dataInfo["authentication_token"] as? String {
                         self.token = token
                     }
                     
                     
                     
+                    if let delegate = self.delegate2 {
+                        delegate.goToApp()
+                    }
                     
-                    self.delegate?.goToApp()
+                    
                     
                 }
                     
@@ -252,7 +262,8 @@ class User {
                 else {
                     
                     println("No data Info")
-                    self.delegate?.signInUnsuccesful(responseInfo!.description)
+                    
+                    self.delegate2?.signInUnsuccesful(responseInfo!.description)
                 }
             }
             
