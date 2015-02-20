@@ -34,6 +34,11 @@ protocol SignedInProtocol {
     
 }
 
+protocol validMoveProtocol {
+    
+    func validMove(isValid: Bool) -> Bool
+    
+}
 
 class APIRequest {
     
@@ -120,6 +125,8 @@ class User {
     var delegate: SignUpViewController?
     
     var delegate2: LoginViewController?
+    
+    var delegate3: GameBoardView?
     
     var token: String? {
         
@@ -212,6 +219,67 @@ class User {
         })
     }
     
+    
+    
+    func sendMove(token: String, id:Int, start: (Int, Int), end: (Int, Int)) -> Bool {
+        // the key names are for us (we chose the name of the keynames, the values are going to be used for url request)
+        
+        var (startRow, startCol) = start
+        var (endRow, endCol) = end
+        
+       
+        var idString = id.description
+        
+        var validMove = false
+        
+        let options: [String: AnyObject] = [
+            
+            "endpoint": "games/\(idString)",
+            "method": "PATCH",
+            "body": [
+                
+                "authentication_token": token,
+                "pick": ["token_start": "[\(startRow.description),\(startCol.description)]", "token_end": "[\(endRow.description),\(endCol.description)"]
+                ]
+                
+                
+            ]
+        
+        
+       
+        
+        
+        // responseInfo will be set at the end of the requestwithoptions function: (completion: requestWithoptions), then we will print responseInfo
+        APIRequest.requestWithOptions(options, andCompletion: { (responseInfo, error) -> () in
+            if error != nil {
+                
+                println("Error != nil")
+                self.delegate3?.validMove(false)
+               
+            }
+            else {
+                
+                
+     
+                    
+                    if let delegate = self.delegate3 {
+                        delegate.validMove(true)
+                        validMove = true
+                    }
+                    
+                
+            }
+            
+            // do something here after request is done
+            
+        })
+
+        return validMove
+
+    }
+
+    
+
     func login(email: String, password: String) {
         
         

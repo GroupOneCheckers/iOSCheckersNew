@@ -21,7 +21,10 @@ import UIKit
 
 // var square = boardSquares[0][0]
 
-@IBDesignable class GameBoardView: UIView , GamePieceDelegate {
+
+
+
+@IBDesignable class GameBoardView: UIView , GamePieceDelegate, validMoveProtocol {
     
     
     let gridSize = 8
@@ -32,9 +35,13 @@ import UIKit
     
     var piecesCreated = false
     
+    var currentPlayer: PieceType?
+    
     // nib is the frame of the VC (the entity that is holding the view and everything)
     override func layoutSubviews() {
         
+        currentPlayer = PieceType.Player1
+        User.currentUser().delegate3 = self
         
         previouslySelected = false
         
@@ -122,7 +129,10 @@ import UIKit
 
     func pieceSelected(piece: GamePiece) {
         
-        println(piece.type.description)
+        
+    
+        println(currentPlayer?.description)
+      
    
 //        let (c, r) = piece.square
         
@@ -133,7 +143,7 @@ import UIKit
         if  previouslySelectedPiece == nil {
             
         
-            if piece.type != PieceType.Empty {
+            if (piece.type != PieceType.Empty) && (piece.type == currentPlayer) {
                 previouslySelectedPiece = piece
                 piece.changeColor(UIColor.redColor())
             }
@@ -167,22 +177,29 @@ import UIKit
                 if moveCol == pieceCol && moveRow == pieceRow {
                     
                     
+
+                   // var validMove = User.currentUser().sendMove(User.currentUser().token!, id: 1, start: (previouslySelectedPiece!.row!, previouslySelectedPiece!.col!), end: (piece.row!, piece.col!))
                     
+                  //  if validMove == true {
+                        let center = piece.center
+                        
+                        piece.center = previouslySelectedPiece!.center
+                        previouslySelectedPiece?.center = center
+                        
+                        let square = piece.square
+                        
+                        piece.square = previouslySelectedPiece?.square
+                        previouslySelectedPiece?.square = square
+                        
+                        DataModel.mainData().currentGame?.boardPieces[previousRow][previousCol] = piece
+                        DataModel.mainData().currentGame?.boardPieces[pieceRow][pieceCol] = previouslySelectedPiece
+                        
+                        
+                        self.detectWinsOrLosses()
+                        currentPlayer = currentPlayer!.other()
+                //    }
                     
-                    let center = piece.center
-                    
-                    piece.center = previouslySelectedPiece!.center
-                    previouslySelectedPiece?.center = center
-                    
-                    let square = piece.square
-                    
-                    piece.square = previouslySelectedPiece?.square
-                    previouslySelectedPiece?.square = square
-                    
-                    DataModel.mainData().currentGame?.boardPieces[previousRow][previousCol] = piece
-                    DataModel.mainData().currentGame?.boardPieces[pieceRow][pieceCol] = previouslySelectedPiece
-                    
-                    
+                  
                 }
 
              
@@ -198,18 +215,21 @@ import UIKit
                 
                 if targetCol == pieceCol && pieceRow == targetRow {
                     
-                    // change that
-                    through.removeFromSuperview()
+                    through.type = .Empty
+                    through.changeColor(UIColor.clearColor())
                     
-                    let emptyPiece = piece
-            
+                    // change that
+//                    through.removeFromSuperview()
+                    
                    // take the center of the piece
                     let center = piece.center
                     // make the empty tile be at the previouslyselectedplayer
                     piece.center = previouslySelectedPiece!.center
-                    emptyPiece.center = through.center
+//                    emptyPiece.center = through.center
                     //make the previouslyselectedTile be at the newlocation center
                     previouslySelectedPiece?.center = center
+                    
+//                    println(emptyPiece == piece)
                     
                     // update the squares
                     let square = piece.square
@@ -217,9 +237,9 @@ import UIKit
                     piece.square = previouslySelectedPiece?.square
                     piece.type = .Empty
     
-                    emptyPiece.square = through.square
+//                    emptyPiece.square = through.square
                     previouslySelectedPiece?.square = square
-                    through.square = emptyPiece.square
+//                    through.square = emptyPiece.square
                     
                     
                 
@@ -228,10 +248,15 @@ import UIKit
                     println("previousrow, previousCOl: \(previousRow) \(previousCol)")
                     
                     DataModel.mainData().currentGame?.boardPieces[previousRow][previousCol] = piece
-                    DataModel.mainData().currentGame?.boardPieces[throughRow][throughCol] = emptyPiece
+                   // DataModel.mainData().currentGame?.boardPieces[throughRow][throughCol] = emptyPiece
                     DataModel.mainData().currentGame?.boardPieces[pieceRow][pieceCol] = previouslySelectedPiece
                     
-                    self.layoutSubviews()
+                    self.detectWinsOrLosses()
+                    
+                    currentPlayer = currentPlayer!.other()
+                    
+                  
+                    
                 
                 }
                 
@@ -239,11 +264,13 @@ import UIKit
             
             previouslySelectedPiece = nil
            
+          
         }
 
     
        
     }
+    
     
     
     func getValidJumpOptions(gamePiece: GamePiece) -> [(target: GamePiece, through: GamePiece)] {
@@ -369,6 +396,44 @@ import UIKit
     
     
 */
+    
+    
+    func detectWinsOrLosses() {
+        if let boardSquares = DataModel.mainData().currentGame?.boardSquares {
+            
+            var noPlayer1Pieces = false
+            var noPlayer2Pieces = false
+            for (rowIndex, rowArray) in enumerate(boardSquares) {
+                
+                
+                for (columnIndex, squarePieceType) in enumerate(rowArray) {
+                    
+                    if squarePieceType == 1 {
+                        noPlayer1Pieces = true
+                    }
+                    if squarePieceType == 2 {
+                        noPlayer2Pieces = true
+                    }
+                    
+                }
+            }
+            
+            if noPlayer1Pieces == false {
+                var alert:UIAlertView = UIAlertView(title: "Message", message: "Player1 Wins", delegate: nil, cancelButtonTitle: "Ok")
+                
+                alert.show()
+            }
+            
+            if noPlayer2Pieces == false {
+                var alert:UIAlertView = UIAlertView(title: "Message", message: "Player2 Wins", delegate: nil, cancelButtonTitle: "Ok")
+                
+                alert.show()
+            }
+        }
+
+    }
+    
+    
     func getValidMoveOptions(gamePiece: GamePiece) -> [GamePiece] {
         
   
@@ -467,6 +532,10 @@ import UIKit
         }
     }
     
+    func validMove(isValid: Bool) -> Bool {
+        
+        return true
+    }
     
     
     // gridSize has to be an int for the loop, but it has to be a float for the drawing
