@@ -22,6 +22,8 @@ class DataModel: NSObject {
 
 class GameModel: NSObject {
     
+    var id = 0
+    
     var boardSquares = [
         
         [0, 1, 0, 1, 0, 1, 0, 1],

@@ -277,6 +277,97 @@ class User {
         return validMove
 
     }
+    
+    func newGame(token: String) {
+        
+        let joinOptions: [String:AnyObject] = [
+            
+            "endpoint" : "games/id",
+            "method" : "POST",
+            "body" : [
+                
+                "authentication_token" : token
+                
+            ]
+            
+        ]
+        
+        let createOptions: [String:AnyObject] = [
+            
+            "endpoint" : "games",
+            "method" : "POST",
+            "body" : [
+                
+                "authentication_token" : token
+                
+            ]
+            
+        ]
+        
+        APIRequest.requestWithOptions(joinOptions, andCompletion: { (responseInfo, error) -> () in
+            
+            if error != nil {
+                
+                // create a game
+                
+                // TODO: see what error this prints. be more specific about in what case(s) we should move on to create a game
+                println(error)
+                
+                APIRequest.requestWithOptions(createOptions, andCompletion: { (responseInfo, error) -> () in
+                    
+                    if error != nil {
+                        
+                        println("Error != nil")
+                        
+                    } else {
+                        
+                        if let dataInfo: AnyObject = responseInfo!["game"] {
+                            
+                            if let board = dataInfo["board"] as? [[Int]] {
+                                
+                                // TODO: This probably should work differently, especially once we have multiple games to keep track of at once
+                                GameModel().boardSquares = board
+                                
+                            }
+                            
+                            if let id = dataInfo["id"] as? Int {
+                                
+                                GameModel().id = id
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                })
+                
+            } else {
+                
+                // you can join a game
+                
+                if let dataInfo: AnyObject = responseInfo!["game"] {
+                    
+                    if let board = dataInfo["board"] as? [[Int]] {
+                        
+                        // TODO: This probably should work differently, especially once we have multiple games to keep track of at once
+                        GameModel().boardSquares = board
+                        
+                    }
+                    
+                    if let id = dataInfo["id"] as? Int {
+                        
+                        GameModel().id = id
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        })
+        
+    }
 
     
 
