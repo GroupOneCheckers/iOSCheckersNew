@@ -21,6 +21,9 @@
 		BDB27CC81A95155300BF7FEB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB27CC71A95155300BF7FEB /* SignUpViewController.swift */; };
 		BDD0509A1A9646BE00E0ACC8 /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD050991A9646BE00E0ACC8 /* TODO.swift */; };
 		BDD0509C1A9646F600E0ACC8 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD0509B1A9646F600E0ACC8 /* GameMode.swift */; };
+		ECCEDEE01A97ADA200C12535 /* Options.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECCEDEDF1A97ADA200C12535 /* Options.storyboard */; };
+		ECCEDEE31A97ADB400C12535 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCEDEE11A97ADB400C12535 /* OptionsViewController.swift */; };
+		ECCEDEE41A97ADB400C12535 /* GamesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCEDEE21A97ADB400C12535 /* GamesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		BDB27CC71A95155300BF7FEB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = GameBoard/SignUpViewController.swift; sourceTree = "<group>"; };
 		BDD050991A9646BE00E0ACC8 /* TODO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TODO.swift; path = GameBoard/TODO.swift; sourceTree = "<group>"; };
 		BDD0509B1A9646F600E0ACC8 /* GameMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameMode.swift; path = GameBoard/GameMode.swift; sourceTree = "<group>"; };
+		ECCEDEDF1A97ADA200C12535 /* Options.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Options.storyboard; sourceTree = "<group>"; };
+		ECCEDEE11A97ADB400C12535 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		ECCEDEE21A97ADB400C12535 /* GamesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,7 @@
 				BDB27CC11A94D9EF00BF7FEB /* GameBoardView.swift */,
 				BDB27CC31A94E33500BF7FEB /* GamePiece.swift */,
 				BDB27CA31A94D5F700BF7FEB /* Main.storyboard */,
+				ECCEDEDF1A97ADA200C12535 /* Options.storyboard */,
 				BDB0A2361A95340E00FAFEC7 /* Model */,
 				BDB27C9C1A94D5F700BF7FEB /* GameBoard */,
 				BDB27CB21A94D5F700BF7FEB /* GameBoardTests */,
@@ -156,6 +163,8 @@
 				BDB27CA11A94D5F700BF7FEB /* ViewController.swift */,
 				BDB27CC71A95155300BF7FEB /* SignUpViewController.swift */,
 				BDB0A2391A954B8800FAFEC7 /* LoginViewController.swift */,
+				ECCEDEE11A97ADB400C12535 /* OptionsViewController.swift */,
+				ECCEDEE21A97ADB400C12535 /* GamesTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -241,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDB27CA51A94D5F700BF7FEB /* Main.storyboard in Resources */,
+				ECCEDEE01A97ADA200C12535 /* Options.storyboard in Resources */,
 				BDB27CAA1A94D5F700BF7FEB /* LaunchScreen.xib in Resources */,
 				BDB27CA71A94D5F700BF7FEB /* Images.xcassets in Resources */,
 			);
@@ -261,6 +271,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDD0509C1A9646F600E0ACC8 /* GameMode.swift in Sources */,
+				ECCEDEE41A97ADB400C12535 /* GamesTableViewController.swift in Sources */,
+				ECCEDEE31A97ADB400C12535 /* OptionsViewController.swift in Sources */,
 				BDB27CC81A95155300BF7FEB /* SignUpViewController.swift in Sources */,
 				BDB27CA21A94D5F700BF7FEB /* ViewController.swift in Sources */,
 				BDB27CA01A94D5F700BF7FEB /* AppDelegate.swift in Sources */,
