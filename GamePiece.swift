@@ -91,9 +91,11 @@ class GamePiece: UIView {
             
         }
         
+        
         // do that so that player 1 (enum 1 and 3) = 0 and player 2 (enum 2 and 4 == 1)
         let playerIndex = (type.rawValue + 1) % 2
         return DataModel.mainData().currentGame?.players[playerIndex]
+        
         
     }
     

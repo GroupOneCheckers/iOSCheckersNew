@@ -255,19 +255,45 @@ class User {
                 
                 println("Error != nil")
                 self.delegate3?.validMove(false)
+                validMove = false
                
             }
             else {
                 
                 
      
+         
                     
-                    if let delegate = self.delegate3 {
-                        delegate.validMove(true)
-                        validMove = true
+                    if let dataInfo: AnyObject = responseInfo!["user"] {
+                        if let isValid = dataInfo["reponse"] as? Int {
+                            if isValid == 1 {
+                                validMove = true
+                                self.delegate3?.validMove(true)
+                            }
+                            
+                            else {
+                                self.delegate3?.validMove(false)
+                                validMove = false                            }
+                        }
+                        
+                        
+                        
+                  
+                        
                     }
+                        
+                        
+                        
+                        
+                        
+                    else {
+                        
+                        println("No data Info")
+                        self.delegate3?.validMove(false)
+                        validMove = false
+                }
                     
-                
+                    
             }
             
             // do something here after request is done

@@ -174,13 +174,16 @@ import UIKit
           
                
             
-                if moveCol == pieceCol && moveRow == pieceRow {
-                    
-                    
+                if (moveCol == pieceCol) && (moveRow == pieceRow) {
 
-                   // var validMove = User.currentUser().sendMove(User.currentUser().token!, id: 1, start: (previouslySelectedPiece!.row!, previouslySelectedPiece!.col!), end: (piece.row!, piece.col!))
                     
-                  //  if validMove == true {
+                    
+            //        var isValid = User.currentUser().sendMove(User.currentUser().token!, id: 1, start: (previouslySelectedPiece!.row!, previouslySelectedPiece!.col!) , end: (moveRow, moveCol))
+                    
+                    var isValid = true
+                    
+                    if isValid {
+                        // UIView updates
                         let center = piece.center
                         
                         piece.center = previouslySelectedPiece!.center
@@ -191,13 +194,22 @@ import UIKit
                         piece.square = previouslySelectedPiece?.square
                         previouslySelectedPiece?.square = square
                         
+                        
+                        // update the model (the singleton)
                         DataModel.mainData().currentGame?.boardPieces[previousRow][previousCol] = piece
                         DataModel.mainData().currentGame?.boardPieces[pieceRow][pieceCol] = previouslySelectedPiece
                         
-                        
                         self.detectWinsOrLosses()
                         currentPlayer = currentPlayer!.other()
-                //    }
+                        
+                        
+                        
+
+                    }
+                    
+                    else {
+                       return
+                    }
                     
                   
                 }
@@ -242,11 +254,12 @@ import UIKit
 //                    through.square = emptyPiece.square
                     
                     
-                
+
                     println("INITIALPIECE IN JUMP: position \(piece.square), type: \(piece.type.description)")
                     
                     println("previousrow, previousCOl: \(previousRow) \(previousCol)")
                     
+
                     DataModel.mainData().currentGame?.boardPieces[previousRow][previousCol] = piece
                    // DataModel.mainData().currentGame?.boardPieces[throughRow][throughCol] = emptyPiece
                     DataModel.mainData().currentGame?.boardPieces[pieceRow][pieceCol] = previouslySelectedPiece
@@ -255,6 +268,7 @@ import UIKit
                     
                     currentPlayer = currentPlayer!.other()
                     
+
                   
                     
                 
