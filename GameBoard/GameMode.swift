@@ -22,7 +22,7 @@ class DataModel: NSObject {
 
 class GameModel: NSObject {
     
-    var id = 0
+    var id =  3
     
     var boardSquares = [
         

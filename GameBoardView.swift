@@ -40,8 +40,11 @@ import UIKit
     // nib is the frame of the VC (the entity that is holding the view and everything)
     override func layoutSubviews() {
         
-        currentPlayer = PieceType.Player1
+        println(User.currentUser())
+        currentPlayer = PieceType.Player2
         User.currentUser().delegate3 = self
+        
+        // User.currentUser().newGame(User.currentUser().token!)
         
         previouslySelected = false
         
@@ -127,6 +130,7 @@ import UIKit
     }
     
 
+    
     func pieceSelected(piece: GamePiece) {
         
         
@@ -178,12 +182,15 @@ import UIKit
 
                     
                     
-            //        var isValid = User.currentUser().sendMove(User.currentUser().token!, id: 1, start: (previouslySelectedPiece!.row!, previouslySelectedPiece!.col!) , end: (moveRow, moveCol))
+                    var isValid = User.currentUser().sendMove(User.currentUser().token!, id: 66, start: (previousRow, previousCol) , end: (moveRow, moveCol))
                     
-                    var isValid = true
+                    //        var isValid = true
                     
                     if isValid {
+                        println(isValid)
                         // UIView updates
+                        
+                        println("it works")
                         let center = piece.center
                         
                         piece.center = previouslySelectedPiece!.center
@@ -204,17 +211,17 @@ import UIKit
                         
                         
                         
-
+                        
                     }
-                    
+                        
                     else {
-                       return
+                        println("bob")
                     }
                     
-                  
+                    
                 }
-
-             
+                
+                
             }
             
             for (target, through) in validJumpOptions {

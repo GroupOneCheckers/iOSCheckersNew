@@ -46,7 +46,7 @@ class APIRequest {
     var delegate: SignUpViewController?
     
     var delegate2: LoginViewController?
-
+    
     // (responseInfo: [String:AnyObject]) -> ()
     
     // that class func gets called in the user class
@@ -227,7 +227,7 @@ class User {
         var (startRow, startCol) = start
         var (endRow, endCol) = end
         
-       
+        
         var idString = id.description
         
         var validMove = false
@@ -239,14 +239,14 @@ class User {
             "body": [
                 
                 "authentication_token": token,
-                "pick": ["token_start": "[\(startRow.description),\(startCol.description)]", "token_end": "[\(endRow.description),\(endCol.description)"]
-                ]
-                
-                
+                "pick": ["token_start": "[\(startRow.description),\(startCol.description)]", "token_end": "[\(endRow.description),\(endCol.description)]"]
             ]
+            
+            
+        ]
         
         
-       
+        
         
         
         // responseInfo will be set at the end of the requestwithoptions function: (completion: requestWithoptions), then we will print responseInfo
@@ -255,53 +255,27 @@ class User {
                 
                 println("Error != nil")
                 self.delegate3?.validMove(false)
-                validMove = false
-               
+                
             }
             else {
                 
                 
-     
-         
-                    
-                    if let dataInfo: AnyObject = responseInfo!["user"] {
-                        if let isValid = dataInfo["reponse"] as? Int {
-                            if isValid == 1 {
-                                validMove = true
-                                self.delegate3?.validMove(true)
-                            }
-                            
-                            else {
-                                self.delegate3?.validMove(false)
-                                validMove = false                            }
-                        }
-                        
-                        
-                        
-                  
-                        
-                    }
-                        
-                        
-                        
-                        
-                        
-                    else {
-                        
-                        println("No data Info")
-                        self.delegate3?.validMove(false)
-                        validMove = false
+                
+                println(responseInfo)
+                if let delegate = self.delegate3 {
+                    delegate.validMove(true)
+                    validMove = true
                 }
-                    
-                    
+                
+                
             }
             
             // do something here after request is done
             
         })
-
+        
         return validMove
-
+        
     }
     
     func newGame(token: String) {
@@ -394,9 +368,9 @@ class User {
         })
         
     }
-
     
-
+    
+    
     func login(email: String, password: String) {
         
         

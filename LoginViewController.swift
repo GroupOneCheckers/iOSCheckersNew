@@ -30,9 +30,9 @@ class LoginViewController: UIViewController, SignedInProtocol {
         
         if let token = User.currentUser().token {
             
-            
+        
   
-            self.goToApp()
+           self.goToApp()
             
         
         }

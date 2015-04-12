@@ -18,10 +18,15 @@ class ViewController: UIViewController {
         //var board = Board()
         
         
+   
         
         //board.boardView = boardView
         
         DataModel.mainData().currentGame = GameModel()
+        
+
+   
+ 
     }
 
     override func didReceiveMemoryWarning() {
